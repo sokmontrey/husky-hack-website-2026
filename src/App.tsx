@@ -1,5 +1,8 @@
-import NavBar from './components/Nav'
-import InputField from './components/InputField'
+import NavBar from "./components/Nav";
+import InputField from "./components/InputField";
+import SponsorLayout from "./components/Sponsors/SponsorLayout"
+import sponsorsData from "./data/sponsors.json"; //used to dynamically fill sponsors
+
 
 export default function App() {
   return (
@@ -55,22 +58,20 @@ export default function App() {
       </div>
     </div>
 
-    {/* Sponsors */}
-    <div className='h-screen bg-gray-500 flex justify-center'>
-      <h1 className='text-3xl font-bold pt-[10vh]'>Our Sponsors</h1>
-      {/* Gold Level Sponsors */}
-      <div id='goldSponsors' className=''>
+    <section id="Sponsors" className="min-h-screen bg-[#333] flex justify-center">
+      <div className="w-full max-w-7xl px-6 py-24">
+        <h1 className="text-3xl font-bold text-center mb-10 text-white p-2">
+          Our Sponsors
+        </h1> 
 
+        <div className="flex justify-center min-h-[30vh]">
+          <SponsorLayout />
+        </div>
       </div>
-      {/* Silver Level Sponsors */}
-      <div id='silverSponsors' className=''>
+    </section>
 
-      </div>
-      {/* Bronze Level Sponsors */}
-      <div id='bronzeSponsors' className=''>
 
-      </div>
-    </div>
+
     </>
   )
 }

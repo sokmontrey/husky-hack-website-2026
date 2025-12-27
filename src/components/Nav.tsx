@@ -10,7 +10,7 @@ export default function NavBar() {
           <div className="flex flex-1 justify-evenly">
             <a href="#About-Us">About Us</a>
             <a href="#Schedule">Schedule</a>
-            <a href="#Sponsor">Sponsor</a>
+            <a href="#Sponsors">Sponsors</a>
             <a href="#FAQ">FAQ</a>
           </div>
         </div>
