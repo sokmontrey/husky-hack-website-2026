@@ -39,13 +39,12 @@ export default function App() {
         <form
           method="POST"
           className="flex flex-col items-center gap-4"
-          aria-label="Newsletter signup"
-        >
+          aria-label="Newsletter signup">
+
           <InputField
             label="Email address"
             type="email"
-            name="email"
-          />
+            name="email"/>
 
           <button
             type="submit"
@@ -67,7 +66,25 @@ export default function App() {
         <div className="flex justify-center min-h-[30vh]">
           <SponsorLayout />
         </div>
+        {/* To implemement in the future */}
+        <div id="SponsorSignUp" className="flex justify-center w-full mt-8">
+          <button
+            className="
+              px-8 py-3 rounded-md 
+              bg-gradient-to-r from-amber-500 to-yellow-400
+              text-black font-semibold tracking-wide shadow-md
+              transition-all duration-300 hover:scale-[1.04]
+              hover:shadow-lg
+              focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-[#333]">
+            Become a Sponsor
+          </button>
+        </div>
+
       </div>
+    </section>
+    {/* FAQ */}
+    <section>
+      
     </section>
 
 
