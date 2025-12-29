@@ -2,7 +2,7 @@ type BronzeSponsorCardProps = {
   title: string;
   sponsorLogo: string;
   borderColour: string;
-  link:string;
+  link: string;
 };
 
 function BronzeSponsorCard({
@@ -16,8 +16,8 @@ function BronzeSponsorCard({
       <div
         className="
           flex flex-col items-center justify-center
-          rounded-md bg-[#434343]
-          h-[15vh] w-[18vw]
+          rounded-md 
+          h-[15vw] w-[15vw]
           p-4
           grayscale opacity-90
           transition duration-300
@@ -29,7 +29,7 @@ function BronzeSponsorCard({
           <img
             src={sponsorLogo}
             alt={`Brand logo for ${title}`}
-            className="max-h-[12vh] max-w-[15vh] object-contain"
+            className="max-h-[12vw] max-w-[12vw] object-contain"
           />
         </div>
       </div>

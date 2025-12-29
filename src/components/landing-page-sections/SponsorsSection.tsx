@@ -2,9 +2,9 @@ import SponsorLayout from "../sponsors/SponsorLayout.tsx";
 
 export default function SponsorsSection() {
     return (
-        <section id="Sponsors" className="min-h-screen bg-[#333] flex justify-center">
-            <div className="w-full max-w-7xl px-6 py-24">
-                <h1 className="text-3xl font-bold text-center mb-10 text-white p-2">
+        <section id="Sponsors" className="flex justify-center py-10">
+            <div className="">
+                <h1 className="text-3xl text-center">
                     Our Sponsors
                 </h1>
 
@@ -12,7 +12,7 @@ export default function SponsorsSection() {
                     <SponsorLayout />
                 </div>
                 {/* To implemement in the future */}
-                <div id="SponsorSignUp" className="flex justify-center w-full mt-8">
+                {/* <div id="SponsorSignUp" className="flex justify-center w-full mt-8">
                     <button
                         className="
               px-8 py-3 rounded-md 
@@ -23,7 +23,7 @@ export default function SponsorsSection() {
               focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-[#333]">
                         Become a Sponsor
                     </button>
-                </div>
+                </div> */}
 
             </div>
         </section>

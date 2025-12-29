@@ -11,7 +11,9 @@ export default function Home() {
             <AboutUsSection />
             {/* <ScheduleSection /> */}
             <SponsorsSection />
+            {/* Partner Section */}
             <FAQSection />
+            {/* Team Section */}
         </>
     )
 }
