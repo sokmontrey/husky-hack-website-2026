@@ -3,20 +3,67 @@ import SponsorLayout from "./components/Sponsors/SponsorLayout"
 import Accordion from "./components/FAQ/Accordian"
 import sponsorsData from "./data/sponsors.json"; //used to dynamically fill sponsors
 
-export default function Home (){
+export default function Home() {
+
+    const {fieldRefs, registerField, unregisterField} = useFormRegistry();
+
+    // Refs for form
+    const emailRef = useRef(null)
+
+    function handleSubmit(e:FormEvent) {
+        e.preventDefault()
+        const data: Record<string, string | number | null> = {};
+
+        if (!fieldRefs.current) return; // Error message?
+
+        // iterates through the field refs and validates each input field
+        Object.values(fieldRefs.current).forEach((field) => {
+            if (!field) return; // Skip if a ref was unmounted but not cleaned up
+
+            console.log("Checking field:", field.getValue());
+            // validationCheck = field.validate();
+            data[field.getName()] = field.getValue();
+        });
+        console.log("Sending",data)
+
+    }
+
     return (
         <>
-        <div id='Home' className='h-[90vh] bg-amber-200'>
-      <div className='content-center h-full mx-5'>
-        <h1 className='text-4xl font-extrabold text-blue-600 text-center mt-5'>Husky Hack</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur beatae nostrum, ut possimus eum sed vitae ab ratione molestiae voluptate cumque alias debitis sapiente eius vero, sequi odio voluptatibus voluptatem!</p>
-      </div>
-    </div>
-    {/* About Us */}
-    <div id='About-Us' className='h-screen bg-gray-700 text-white'>
-      <div>
-      <h1 className='text-3xl text-center pt-[50vh]'>About Us</h1>
-      </div>
+            <div id='Home' className='h-[90vh] bg-amber-200'>
+                <div className='content-center h-full mx-5'>
+                    <h1 className='text-4xl font-extrabold text-blue-600 text-center mt-5'>Husky Hack</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur beatae nostrum, ut possimus eum
+                        sed vitae ab ratione molestiae voluptate cumque alias debitis sapiente eius vero, sequi odio
+                        voluptatibus voluptatem!</p>
+                </div>
+
+                <FormContext.Provider value={{unregisterField,registerField}}>
+                    {/*Note: This could be a wrapper component*/}
+                    <form onSubmit={handleSubmit}>
+                        <InputField
+                            label="Dont miss a thing"
+                            name="email"
+                            type="text"
+                            required={true}
+                            placeholder="Enter your email"
+                            ref={emailRef}
+                        />
+
+                        <button
+                            type="submit"
+                            className="w-full py-3 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 disabled:bg-gray-400 transition-colors"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </FormContext.Provider>
+            </div>
+            {/* About Us */}
+            <div id='About-Us' className='h-screen bg-gray-700 text-white'>
+                <div>
+                    <h1 className='text-3xl text-center pt-[50vh]'>About Us</h1>
+                </div>
 
     </div>
     {/* Schedule */}
