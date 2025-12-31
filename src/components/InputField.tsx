@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useContext, useEffect, useImperativeHandle, useState, type RefObject } from "react";
+import {type RefObject, useCallback, useContext, useEffect, useImperativeHandle, useRef, useState} from "react";
 import FormContext from "./FormContext";
 
 export interface InputFieldRef {
@@ -46,63 +46,62 @@ function InputField(props: InputFieldProps) {
         ref
     } = props;
 
+    const valueRef = useRef(value);
+    useEffect(() => {
+        valueRef.current = value;
+    }, [value]);
     const runValidation = useCallback((): boolean => {
-        // console.log("value",value.trim())
-        if (required && !value.trim()) {
+        const currentValue = valueRef.current; // Use the ref here
+        if (required && !currentValue.trim()) {
             setError(`${label} is required`);
             return false;
         }
         for (const v of customValidation) {
-            if (!v.rule(value)) {
+            if (!v.rule(currentValue)) {
                 setError(v.message);
                 return false;
             }
         }
         setError("");
         return true;
-    }, [value, required, customValidation, label]);
+    }, [required, customValidation, label]);
 
-    const api: InputFieldRef = {
-        getValue: () => value,
+
+    // Expose methods via the ref prop
+    useImperativeHandle(ref, () => ({
+        getValue: () => valueRef.current,
         getName: () => name,
-        validate: () => runValidation(), // uses the callback function
+        validate: () => runValidation(),
         setExternalError: (msg: string) => setError(msg),
         reset: () => {
             setValue("");
             setError("");
         }
-    };
+    }), [name, runValidation]);    //
 
     const formContext = useContext(FormContext);
 
-    const setRegistry = useCallback((node: any) => {
-        if (formContext) {
-            if (node) {
-                // node is the object returned by useImperativeHandle
-                formContext.registerField(name, node);
-            } else {
-                // node is null when the component unmounts
-                formContext.unregisterField(name);
-            }
-        }
-    }, [formContext, name]);
-    // Expose methods via the ref prop
-    useImperativeHandle(ref, () => api, [api]);    // useEffect(() => {
-    //
-    //     console.log("Current state val",value)
-    //     console.log("current ref val:",ref?.current?.getValue())
-    // }, [value]);
-    //
     useEffect(() => {
-        if (formContext) formContext.registerField(name, api);
-        return () => formContext?.unregisterField(name);
-    }, [name, api]);
+        if (!formContext) return;
 
+        const currentApi: InputFieldRef = {
+            getValue: () => valueRef.current,
+            getName: () => name,
+            validate: () => runValidation(),
+            setExternalError: (msg: string) => setError(msg),
+            reset: () => {
+                setValue("");
+                setError("");
+            }
+        };
 
+        formContext.registerField(name, currentApi);
+        return () => formContext.unregisterField(name);
+    }, [name, formContext, runValidation]);
 
 
     return (
-        <div ref={setRegistry}>
+        <div>
             <label htmlFor={name}>{label}</label>
             <input
                 id={name}
@@ -113,9 +112,9 @@ function InputField(props: InputFieldProps) {
                 placeholder={placeholder}
                 maxLength={maxLength}
                 className={`p-2 border rounded-md focus:ring-2 outline-none transition-all ${error ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:ring-blue-100"
-                    }`}
+                }`}
             />
-            <button onClick={() => console.log(ref?.current?.getValue())} />
+            <button onClick={() => console.log(ref?.current?.getValue())}/>
             <div className="min-h-[1.25rem] mt-1">
                 {error && (
                     <p className="text-xs text-red-500 font-medium animate-in fade-in slide-in-from-top-1">
