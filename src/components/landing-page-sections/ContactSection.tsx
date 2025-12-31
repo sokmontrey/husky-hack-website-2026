@@ -14,14 +14,16 @@ export default function ContactSection() {
         const subject = form.subject.value;
         const body = form.body.value;
 
-        const recipientEmail = "huskyhack.info@gmail.com";
+        const recipientEmail = "fidaawsaf@gmail.com";
 
-        const emailSubject = encodeURIComponent(subject);
-        const emailBody = encodeURIComponent(
-            `From: ${name}\n\n${body}`
-        );
+        const gmailUrl =
+            "https://mail.google.com/mail/?" +
+            "view=cm&fs=1&tf=1" +
+            `&to=${encodeURIComponent(recipientEmail)}` +
+            `&su=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(`From: ${name}\n\n${body}`)}`;
 
-        window.location.href = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+        window.open(gmailUrl, "_blank");
     }
 
 
