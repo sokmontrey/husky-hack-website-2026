@@ -5,7 +5,7 @@ import SponsorsSection from "./components/landing-page-sections/SponsorsSection"
 import FAQSection from "./components/landing-page-sections/FAQSection";
 import TeamSection from "./components/landing-page-sections/TeamSection";
 import FooterSection from "./components/landing-page-sections/FooterSection";
-import ContactSection from "./components/landing-page-sections/ContactSection.tsx";
+import ContactSection from "./components/landing-page-sections/ContactSection";
 
 export default function Home() {
     return (
