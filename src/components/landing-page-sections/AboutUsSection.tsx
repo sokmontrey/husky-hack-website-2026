@@ -7,7 +7,7 @@ export default function AboutUsSection() {
                     {/* A hackathon run with &lt;3 by programmers, designers, innovators, and most important of all, storytellers.
                     A student-run hackathon for innovators, artists, and storytellers. */}
 
-                    A student-run hackathon by a group of friends who think they can make it happen and now it's too late to turn back.
+                    {" A student-run hackathon by a group of friends who think they can make it happen and now it's too late to turn back."}
                 </p>
             </div>
         </div>

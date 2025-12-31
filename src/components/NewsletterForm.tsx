@@ -69,7 +69,7 @@ export default function NewsletterForm() {
                 </div>
 
                 <p className="text-sm text-gray-600 whitespace-nowrap px-2 pr-4">
-                    Don't miss a thing.
+                    {"Don't miss a thing."}
                 </p>
             </div>
 
