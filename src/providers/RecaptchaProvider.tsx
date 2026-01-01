@@ -2,6 +2,7 @@
 
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import type { ReactNode } from 'react';
+import process from "node:process";
 
 export default function RecaptchaProvider({ children }: { children: ReactNode }) {
     return (

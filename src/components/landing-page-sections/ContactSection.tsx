@@ -5,25 +5,24 @@ import {useState} from "react";
 export default function ContactSection() {
     const [isHovered, setIsHovered] = useState(false)
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const form = e.target;
+        const form = e.currentTarget;
 
         const name = form.name.value;
         const subject = form.subject.value;
         const body = form.body.value;
 
-        const recipientEmail = "fidaawsaf@gmail.com";
+        const recipientEmail = "huskyhack.info@gmail.com";
 
-        const gmailUrl =
-            "https://mail.google.com/mail/?" +
-            "view=cm&fs=1&tf=1" +
-            `&to=${encodeURIComponent(recipientEmail)}` +
-            `&su=${encodeURIComponent(subject)}` +
-            `&body=${encodeURIComponent(`From: ${name}\n\n${body}`)}`;
-
-        window.open(gmailUrl, "_blank");
+        // Use mailto: instead of Gmail URL to avoid security warnings
+        const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name}\n\n${body}`)}`;
+        
+        // Create a temporary anchor element and click it
+        const link = document.createElement('a');
+        link.href = mailtoLink;
+        link.click();
     }
 
 
