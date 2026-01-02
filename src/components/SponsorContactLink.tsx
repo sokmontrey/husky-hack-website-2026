@@ -6,7 +6,7 @@ export default function SponsorContactLink() {
                 Contact us at 
                 <span> </span>
                 <a href="mailto:huskyhack.sponsor@gmail.com" 
-                className="underline text-sky-500">
+                className="underline text-blue-700">
                     huskyhack.sponsor@gmail.com!
                 </a>
             </span>
