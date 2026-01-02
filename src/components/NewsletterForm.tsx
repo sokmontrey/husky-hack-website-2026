@@ -36,8 +36,7 @@ export default function NewsletterForm() {
 
                 const response = await subscribeToNewsletter({
                     email,
-                    recaptchaToken,
-                });
+                }, recaptchaToken);
 
                 setStatus(response);
 
