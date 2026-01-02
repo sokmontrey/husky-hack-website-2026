@@ -1,14 +1,37 @@
+import faqs from "../../data/faqs.json";
 import Accordion from "../faq/Accordian";
+import huskyPeekComputer from "../../assets/husky-peek-computer.png";
+import Image from "next/image";
 
 export default function FAQSection() {
     return (
-        <section id="FAQ" className="min-h-screen bg-[#222] text-white py-16">
-            <h1 className="text-3xl font-bold text-center mb-12">
-                Frequently Asked Questions
-            </h1>
+        <section id="FAQ" className="py-40 pt-10">
+            <h1 className="text-4xl font-serif text-center mb-10">FAQs</h1>
 
-            <div className="flex justify-center gap-12 px-8">
-                {/* Left Column */}
+            <div className="grid grid-cols-[3fr_4fr] gap-4 w-full justify-center">
+                <div className="justify-self-end flex flex-col items-center justify-center">
+                    <h1 className="text-2xl font-serif">?</h1>
+                    <Image
+                        src={huskyPeekComputer}
+                        alt="Husky Peek Using Computer"
+                        width={300}
+                        height={300}
+                        className="w-1/2"
+                    />
+                </div>
+
+                <div className="flex flex-col gap-4 w-[70%]">
+                    {faqs.map((faq, index) => (
+                        <Accordion
+                            key={index}
+                            question={faq.question}
+                            answer={faq.answer}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/*<div className="flex justify-center gap-12 px-8">
                 <div className="bg-[#1a1a1a] w-[40vw] p-6 space-y-4 rounded-md">
                     <Accordion
                         title="When is it?"
@@ -26,7 +49,6 @@ export default function FAQSection() {
                     />
                 </div>
 
-                {/* Right Column */}
                 <div className="bg-[#1a1a1a] w-[40vw] p-6 space-y-4 rounded-md">
                     <Accordion
                         title="How much does it cost?"
@@ -43,7 +65,7 @@ export default function FAQSection() {
                         answer="Bring your laptop, charger, and enthusiasm!"
                     />
                 </div>
-            </div>
+            </div>*/}
         </section>
     );
 }
