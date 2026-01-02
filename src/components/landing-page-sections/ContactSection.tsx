@@ -1,13 +1,13 @@
 "use client";
-import {BookOpen, MessageSquare, MoveRight, MoveLeft, User} from 'lucide-react';
+import {BookOpen, MessageSquare, MoveRight, MoveLeft} from 'lucide-react';
 
 import Link from 'next/link';
+import {useSearchParams} from "next/navigation";
 
-interface ContactSectionProps {
-    query: string;
-}
 
-export default function ContactSection({query}: ContactSectionProps) {
+
+export default function ContactSection() {
+    const query = useSearchParams().get("query") || "support";
 
     function handleSubmit(e) {
         e.preventDefault();
