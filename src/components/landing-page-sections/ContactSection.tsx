@@ -1,6 +1,6 @@
 "use client";
 import {BookOpen, MessageSquare, MoveRight, MoveLeft, User} from 'lucide-react';
-import {useState} from "react";
+
 import Link from 'next/link';
 
 interface ContactSectionProps {
@@ -8,7 +8,6 @@ interface ContactSectionProps {
 }
 
 export default function ContactSection({query}: ContactSectionProps) {
-    const [isHovered, setIsHovered] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -85,13 +84,11 @@ export default function ContactSection({query}: ContactSectionProps) {
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            onMouseEnter={() => setIsHovered(true)}
-                            onMouseLeave={() => setIsHovered(false)}
                             className="group flex items-center gap-3 bg-gray-900 py-4 px-8 rounded-full font-bold text-white hover:bg-gray-800 transition-all duration-300 active:scale-95"
                         >
                             <span>Send Email</span>
                             <MoveRight
-                                className={`transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
                                 size={20}
                             />
                         </button>
