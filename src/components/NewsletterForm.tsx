@@ -71,7 +71,8 @@ export default function NewsletterForm() {
                         disabled={isSubmitting}
                         placeholder="Signup for our newsletter"
                         ref={emailRef}
-                        className="p-3 pr-0 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0 placeholder:text-xs"
+
+                        className="p-3 pb-4 pr-0 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0 placeholder:text-xs"
                     />
 
                     <button

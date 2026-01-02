@@ -20,8 +20,8 @@ export default function HeroSection() {
 
                         />
                         {/* Heading */}
-                        <h1 className="text-5xl md:text-7xl font-bold text-gray-900 font-serif tracking-tight p-0 -translate-y-2">
-                            {"Husky"}<span className={"text-sky-500"}>{"<Hack/>"}</span>
+                        <h1 className="text-5xl md:text-7xl text-gray-900 font-serif tracking-tight p-0 -translate-y-2 ">
+                            {"Husky"}<span className={"text-sky-600"}>{"<Hack/>"}</span>
                         </h1>
                     </div>
 
@@ -29,12 +29,10 @@ export default function HeroSection() {
 
                     {/* Details */}
                     <div className="mx-10">
-                        <p className="text-sm md:text-lg font-light text-gray-700 uppercase tracking-widest">
-                            May 1-2 • George Brown College, Daniel’s Building
-                        </p>
-                        <p className="text-base text-gray-500">
+                        <p className="text-sm md:text-xl font-serif text-gray-700 uppercase tracking-widest">
                             24 Hours &bull; May 2026
                         </p>
+
 
                     </div>
                     <NewsletterForm/>
