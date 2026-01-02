@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function ScheduleSection() {
     return (
-        <div className="py-40">
+        <section className="py-40">
             <div className="flex justify-center">
                 <h1 className="text-4xl text-start font-serif">
                     <span className="font-serif text-lg">
@@ -15,6 +15,6 @@ export default function ScheduleSection() {
 
                 <Image src={calendar} alt="Calendar" width={100} height={100} />
             </div>
-        </div>
+        </section>
     );
 }
