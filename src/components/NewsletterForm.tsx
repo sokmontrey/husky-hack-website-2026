@@ -63,7 +63,7 @@ export default function NewsletterForm() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 justify-center my-2">
             <div className="flex items-center rounded-full bg-sky-200 p-1 transition-all duration-300
             focus-within:ring-2 focus-within:ring-blue-400 md:w-96">
-                <div className="flex items-center gap-1 flex-grow bg-white rounded-full hover:pr-2 transition-all duration-300 w-48 ">
+                <div className="flex items-center gap-1 flex-grow bg-white rounded-full hover:pr-2 transition-all duration-300 w-48">
                     <input
                         type="email"
                         name="email"
@@ -71,7 +71,7 @@ export default function NewsletterForm() {
                         disabled={isSubmitting}
                         placeholder="Signup for our newsletter"
                         ref={emailRef}
-                        className="p-3 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0 placeholder:text-xs"
+                        className="p-3 pr-0 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0 placeholder:text-xs"
                     />
 
                     <button
