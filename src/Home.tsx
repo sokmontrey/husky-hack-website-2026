@@ -11,6 +11,7 @@ import ScheduleSection from "./components/landing-page-sections/ScheduleSection"
 export default function Home() {
     return (
         <>
+            {/* TEST */}
             <HeroSection />
             <AboutUsSection />
             <ScheduleSection />
