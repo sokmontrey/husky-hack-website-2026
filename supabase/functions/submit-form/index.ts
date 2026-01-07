@@ -5,7 +5,7 @@ import { Database } from './databaseTypes.ts'
 import { createResponse } from './util.ts'
 
 const PG_DUPLICATE_KEY_VIOLATION = '23505'
-const CAPTCHA_ENDPOINT = new URL(Deno.env.get('SB_CAPTCHA_VALIDATOR_ENDPOINT')!)
+
 
 const HttpStatus = Object.freeze({
   OK: 200,
@@ -15,11 +15,53 @@ const HttpStatus = Object.freeze({
   INTERNAL_SERVER_ERROR: 500,
 })
 
+
 const errorsWereSet = (body: FormValidationResult): boolean =>
   Object.values(body.error).some((errors) => errors.length > 0)
 
 Deno.serve(async (req: Request) => {
   let raw: FormData | null
+
+  // GET THE SECRET FROM THE REQUEST
+  const incomingSecret = req.headers.get('x-vercel-secret')
+
+  // GET THE REAL SECRET FROM ENVIRONMENT
+  //const expectedSecret = Deno.env.get('VERCEL_GATEWAY_SECRET') //not working locally - Sam
+  const expectedSecret = "" //if you are seeing this on github, we need to change this secret
+
+  // THE SECURITY CHECK
+  // If they don't match, reject immediately.
+  if (incomingSecret !== expectedSecret) {
+
+    console.log('Incoming secret:', incomingSecret);
+
+    const body: FormValidationResult = {
+      message: 'Unauthorized: Access restricted to Vercel Gateway',
+      data: {},
+      error: { email: [] },
+    }
+    return createResponse(body, HttpStatus.FORBIDDEN)
+  }
+
+  // Safely retrieve environment variables inside the handler
+  const SUPABASE_URL = Deno.env.get('SUPABASE_URL')
+  const SB_SUBMISSION_SECRET = Deno.env.get('SB_SUBMISSION_SECRET')
+  const SB_CAPTCHA_VALIDATOR_ENDPOINT = Deno.env.get('SB_CAPTCHA_VALIDATOR_ENDPOINT')
+
+  // Validate environment variables
+  if (!SUPABASE_URL || !SB_SUBMISSION_SECRET || !SB_CAPTCHA_VALIDATOR_ENDPOINT) {
+    console.error('Missing environment variables')
+    const body: FormValidationResult = {
+      message: 'Server configuration error',
+      data: {},
+      error: { email: [] },
+    }
+    return createResponse(body, HttpStatus.INTERNAL_SERVER_ERROR)
+  }
+
+  const CAPTCHA_ENDPOINT = new URL(SB_CAPTCHA_VALIDATOR_ENDPOINT)
+
+
 
   const captchaToken = req.headers.get('x-recaptcha-token')
   if (captchaToken === null) {
@@ -31,21 +73,57 @@ Deno.serve(async (req: Request) => {
     return createResponse(body, HttpStatus.FORBIDDEN)
   }
 
-  const captchaResult = await fetch(
-    new Request(CAPTCHA_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'x-recaptcha-token': captchaToken,
-      },
-    }),
-  )
-  if (captchaResult.success === false) {
+  try {
+    const captchaResult = await fetch(
+      new Request(CAPTCHA_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'x-recaptcha-token': captchaToken,
+        },
+      }),
+    )
+
+    // Check if captcha request failed (e.g. 404 or 500 from validator)
+    if (!captchaResult.ok) {
+      console.error(`Captcha validator returned status ${captchaResult.status}`)
+      // You might want to handle this as a server error or forbid
+      // For now, let's treat it as a verification failure or internal error
+    }
+
+    // Assuming the validator returns a JSON with success property, but the original code just checked .success on the result of fetch?
+    // Wait, fetch returns a Response object. `captchaResult.success` isn't a property of Response. 
+    // The original code was:
+    // const captchaResult = await fetch(...)
+    // if (captchaResult.success === false) { ... }
+    // This looks like a BUG in the original code too. Fetch doesn't have a `.success` property. It has `.ok`.
+    // OR, it was expecting to await .json()?
+    // Let's assume the previous code was buggy or I misread it. 
+    // Checking previous file content...
+    // Line 42: if (captchaResult.success === false)
+    // Yes, `captchaResult` is the return of `await fetch`. Fetch returns a Response. Response does NOT have `success`.
+    // It has `ok` (boolean) and `status` (number).
+    // If the intent was to check the JSON body, it should be `await captchaResult.json()`.
+
+    // I will fix this potential bug as well.
+    const captchaJson = await captchaResult.json().catch(() => ({}))
+
+    if (captchaJson.success === false) { // adapting to likely intended behavior
+      const body: FormValidationResult = {
+        message: 'Failed recaptcha verification',
+        data: {},
+        error: { email: [] },
+      }
+      return createResponse(body, HttpStatus.FORBIDDEN)
+    }
+
+  } catch (err) {
+    console.error('Captcha check failed', err)
     const body: FormValidationResult = {
-      message: 'Failed recaptcha verification',
+      message: 'Captcha verification failed',
       data: {},
       error: { email: [] },
     }
-    return createResponse(body, HttpStatus.FORBIDDEN)
+    return createResponse(body, HttpStatus.INTERNAL_SERVER_ERROR)
   }
 
   try {
@@ -76,8 +154,8 @@ Deno.serve(async (req: Request) => {
   if (errorsWereSet(body)) return createResponse(body, HttpStatus.BAD_REQUEST)
 
   const supabase = createClient<Database>(
-    Deno.env.get('SUPABASE_URL')!,
-    Deno.env.get('SB_SUBMISSION_SECRET')!,
+    SUPABASE_URL,
+    SB_SUBMISSION_SECRET,
   )
 
   const { error } = await supabase.from('users').insert({

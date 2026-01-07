@@ -14,7 +14,7 @@ export type InvokeResponse<TError> = {
 
 export async function invokeFunction<TRequest, TError>(
     functionName: string,
-    errorSchema: z.ZodType<TError>, 
+    errorSchema: z.ZodType<TError>,
     body: TRequest,
     recaptchaToken: string
 ): Promise<InvokeResponse<TError>> {
@@ -39,6 +39,7 @@ export async function invokeFunction<TRequest, TError>(
         const result = ResponseSchema.safeParse(errorMessage);
 
         if (!result.success) {
+            console.log("Raw error response received from Edge Function:", errorMessage);
             console.log("Schema mismatch on error response:", result.error);
             return {
                 message: "Something went wrong. Please try again later.",
@@ -51,10 +52,10 @@ export async function invokeFunction<TRequest, TError>(
         return {
             message: result.data.message || "Something went wrong.",
             type: "error",
-            error: result.data.error, 
+            error: result.data.error,
             data: result.data.data,
         };
-    } 
+    }
 
     if (error instanceof FunctionsRelayError) {
         return {
