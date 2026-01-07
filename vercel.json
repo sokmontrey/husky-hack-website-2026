@@ -3,7 +3,7 @@
         "iad1"
     ],
     "functions": {
-        "api/*": {
+        "src/app/api/*": {
             "maxDuration": 60
         }
     }
