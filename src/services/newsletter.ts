@@ -30,7 +30,7 @@ export const subscribeToNewsletter = async (
     body: NewsletterRequestType,
     recaptchaToken: string
 ): Promise<StandardResponse<NewsletterResponseType>> => {
-
+    console.log('Subscribing to newsletter...');
     // Validation Check
     const validationError = validateRequest(NewsletterRequest, body);
     if (validationError) {
