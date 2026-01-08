@@ -39,7 +39,7 @@ export const subscribeToNewsletter = async (
     try {
         // Call Vercel (The Gatekeeper)
         console.log('Calling Vercel...');
-        const res = await fetch('/api/submit', {
+        const res = await fetch('https://nameless-disk-9908.cloudflare-flatware557.workers.dev/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ...body, recaptchaToken }),
