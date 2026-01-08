@@ -72,6 +72,7 @@ export const subscribeToNewsletter = async (
         };
 
     } catch (err: any) {
+        console.error('Error in API route:', err);
         return {
             message: "Network error occurred.",
             type: "error",
