@@ -3,7 +3,7 @@ import validateFormData from './validateForm.ts'
 import { createClient } from '@supabase/supabase-js'
 import { Database } from './databaseTypes.ts'
 import { createResponse } from './util.ts'
-
+import { corsHeaders } from '../_shared/cors.ts'
 const PG_DUPLICATE_KEY_VIOLATION = '23505'
 
 
@@ -20,13 +20,18 @@ const errorsWereSet = (body: FormValidationResult): boolean =>
   Object.values(body.error).some((errors) => errors.length > 0)
 
 Deno.serve(async (req: Request) => {
+
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+
   let raw: FormData | null
 
   // GET THE SECRET FROM THE REQUEST
-  const incomingSecret = req.headers.get('x-vercel-secret')
+  const incomingSecret = req.headers.get('x-cf-secret')
 
   // GET THE REAL SECRET FROM ENVIRONMENT
-  const expectedSecret = Deno.env.get('VCL_GATEWAY_SECRET')
+  const expectedSecret = Deno.env.get('CF_GATEWAY_SECRET')
 
   // THE SECURITY CHECK
   // If they don't match, reject immediately.
@@ -82,31 +87,16 @@ Deno.serve(async (req: Request) => {
       }),
     )
 
-    // Check if captcha request failed (e.g. 404 or 500 from validator)
-    if (!captchaResult.ok) {
-      console.error(`Captcha validator returned status ${captchaResult.status}`)
-      // You might want to handle this as a server error or forbid
-      // For now, let's treat it as a verification failure or internal error
-    }
+    // // Check if captcha request failed (e.g. 404 or 500 from validator)
+    // if (!captchaResult.ok) {
+    //   console.error(`Captcha validator returned status ${captchaResult.status}`)
+    //   // You might want to handle this as a server error or forbid
+    //   // For now, let's treat it as a verification failure or internal error
+    // }
 
-    // Assuming the validator returns a JSON with success property, but the original code just checked .success on the result of fetch?
-    // Wait, fetch returns a Response object. `captchaResult.success` isn't a property of Response. 
-    // The original code was:
-    // const captchaResult = await fetch(...)
-    // if (captchaResult.success === false) { ... }
-    // This looks like a BUG in the original code too. Fetch doesn't have a `.success` property. It has `.ok`.
-    // OR, it was expecting to await .json()?
-    // Let's assume the previous code was buggy or I misread it. 
-    // Checking previous file content...
-    // Line 42: if (captchaResult.success === false)
-    // Yes, `captchaResult` is the return of `await fetch`. Fetch returns a Response. Response does NOT have `success`.
-    // It has `ok` (boolean) and `status` (number).
-    // If the intent was to check the JSON body, it should be `await captchaResult.json()`.
+    //const captchaJson = await captchaResult.json().catch(() => ({}))
 
-    // I will fix this potential bug as well.
-    const captchaJson = await captchaResult.json().catch(() => ({}))
-
-    if (captchaJson.success === false) { // adapting to likely intended behavior
+    if (captchaResult.success === false) { // adapting to likely intended behavior
       const body: FormValidationResult = {
         message: 'Failed recaptcha verification',
         data: {},
