@@ -12,7 +12,8 @@ type StandardResponse<T> = {
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-recaptcha-token",
+    "Access-Control-Allow-Headers":
+        "authorization, x-client-info, apikey, content-type, x-recaptcha-token",
 }
 
 const NewsletterRequest = z.object({
@@ -46,7 +47,8 @@ export const subscribeToNewsletter = async (
         // Call cloudflare (The Gatekeeper)
         const res = await fetch('https://nameless-disk-9908.cloudflare-flatware557.workers.dev/', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', ...corsHeaders },
+            //headers: { 'Content-Type': 'application/json', ...corsHeaders },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ...body, recaptchaToken }),
         });
 
