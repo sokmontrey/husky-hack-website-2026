@@ -36,11 +36,11 @@ Deno.serve(async (req: Request) => {
   if (incomingSecret !== expectedSecret) {
 
     const body: FormValidationResult = {
-      message: '',
+      message: 'Invalid secret',
       data: {},
       error: { email: [] },
     }
-    return createResponse(body, 404) // I hope that return 404 will make bad actor stop trying to access this function
+    return createResponse(body, HttpStatus.FORBIDDEN)
   }
 
   // Safely retrieve environment variables inside the handler
@@ -85,7 +85,7 @@ Deno.serve(async (req: Request) => {
 
     if (captchaResult.success === false) { // adapting to likely intended behavior
       const body: FormValidationResult = {
-        message: 'Failed recaptcha verification',
+        message: 'Unable to verify you are a human',
         data: {},
         error: { email: [] },
       }

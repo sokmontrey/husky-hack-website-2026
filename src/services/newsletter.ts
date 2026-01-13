@@ -45,7 +45,7 @@ export const subscribeToNewsletter = async (
 
     try {
         // Call cloudflare (The Gatekeeper)
-        const res = await fetch('https://nameless-disk-9908.cloudflare-flatware557.workers.dev/', {
+        const res = await fetch(process.env.CF_URL!, {
             method: 'POST',
             //headers: { 'Content-Type': 'application/json', ...corsHeaders },
             headers: { 'Content-Type': 'application/json' },

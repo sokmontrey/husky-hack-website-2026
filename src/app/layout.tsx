@@ -14,21 +14,15 @@ const chivoMono = Chivo_Mono({
     subsets: ["latin"],
 });
 
-// 1. Define the Base URL to fix image links in production
-// Change this to your actual Vercel domain once you have it
-const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000';
-
 export const metadata: Metadata = {
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL("https://huskyhack.ca"),
     title: "HuskyHack 2026",
     description: "Everyone has a story to tell. Turn yours into something real alongside 100+ new friends in the heart of Toronto.",
     openGraph: {
         title: "HuskyHack 2026",
         description: "Everyone has a story to tell. Turn yours into something real alongside 100+ new friends in the heart of Toronto.",
         type: "website",
-        url: "https://huskyhack.com",
+        url: "https://huskyhack.ca",
         siteName: 'HuskyHack',
         locale: 'en_US',
         images: [
