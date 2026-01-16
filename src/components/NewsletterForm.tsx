@@ -65,41 +65,34 @@ export default function NewsletterForm() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-2 justify-center my-2"
+            className="flex flex-col gap-2 justify-center"
         >
             <div
-                className="flex items-center rounded-full bg-sky-200 p-1 transition-all duration-300
-            focus-within:ring-2 focus-within:ring-blue-400 md:w-96"
+                className="flex items-center rounded-full bg-white p-1 transition-all duration-300 focus-within:ring-2 md:w-full
+                "
             >
-                <div className="flex items-center gap-1 flex-grow bg-white rounded-full hover:pr-2 transition-all duration-300 w-48">
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        disabled={isSubmitting}
-                        placeholder="Signup for our newsletter"
-                        ref={emailRef}
-                        className="p-3 pb-4 pr-0 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0 placeholder:text-xs"
-                    />
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    disabled={isSubmitting}
+                    placeholder="email@example.com..."
+                    ref={emailRef}
+                    className="p-3 px-5 rounded-full flex-1 focus:outline-none focus:ring-none min-w-0
+                    placeholder:text-base placeholder:text-gray-500 text-gray-800"
+                />
 
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="p-0 pr-4 rounded-full font-bold hover:scale-[1.04] transition-all duration-300
-                        hover:text-blue-600 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed
-                        "
-                    >
-                        {isSubmitting ? (
-                            <div className="h-6 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600" />
-                        ) : (
-                            <MoveRight className={"w-5 md:w-6"} />
-                        )}
-                    </button>
-                </div>
-
-                <p className="text-xs md:text-sm text-gray-600 whitespace-nowrap px-2">
-                    {"ฅ^•ﻌ•^ฅ"}
-                </p>
+                <button type="submit" disabled={isSubmitting} className="">
+                    {isSubmitting ? (
+                        <div className="pr-4">
+                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-orange-500" />
+                        </div>
+                    ) : (
+                        <button className="bg-orange-500 border-2 border-amber-800 text-gray-900 px-10 py-3 rounded-full">
+                            Sign up for updates
+                        </button>
+                    )}
+                </button>
             </div>
 
             <div className="px-2">
@@ -108,9 +101,9 @@ export default function NewsletterForm() {
                         <FieldError status={status} fieldName="email" />
 
                         <p
-                            className={`text-sm ${status.type === "success" ? "text-green-600" : "text-red-500"}`}
+                            className={`text-base ${status.type === "success" ? "text-green-600" : "text-red-500"}`}
                         >
-                            {status.message}
+                            {status.message} hello
                         </p>
                     </>
                 )}
