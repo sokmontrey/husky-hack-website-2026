@@ -82,17 +82,19 @@ export default function NewsletterForm() {
                     placeholder:text-base placeholder:text-gray-500 text-gray-800"
                 />
 
-                <button type="submit" disabled={isSubmitting} className="">
-                    {isSubmitting ? (
-                        <div className="pr-4">
-                            <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-orange-500" />
-                        </div>
-                    ) : (
-                        <button className="bg-orange-500 border-2 border-amber-800 text-gray-900 px-10 py-3 rounded-full">
-                            Sign up for updates
-                        </button>
-                    )}
-                </button>
+                {isSubmitting ? (
+                    <div className="pr-4">
+                        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-orange-500" />
+                    </div>
+                ) : (
+                    <button
+                        disabled={isSubmitting}
+                        type="submit"
+                        className="bg-orange-500 border-2 border-amber-800 text-gray-900 px-10 py-3 rounded-full"
+                    >
+                        Sign up
+                    </button>
+                )}
             </div>
 
             <div className="px-2">
@@ -103,7 +105,7 @@ export default function NewsletterForm() {
                         <p
                             className={`text-base ${status.type === "success" ? "text-green-600" : "text-red-500"}`}
                         >
-                            {status.message} hello
+                            {status.message}
                         </p>
                     </>
                 )}

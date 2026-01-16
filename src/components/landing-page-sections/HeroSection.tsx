@@ -1,18 +1,13 @@
-"use client";
-
-import { useRef } from "react";
-
-import BackgroundLayer from "../hero-svg/BackgroundLayer";
+import backgroundLayer from "../hero-svg/backgroundLayer.svg";
 import NewsletterForm from "../NewsletterForm";
 import SponsorContactLink from "../SponsorContactLink";
+import Image from "next/image";
 
 export default function HeroSection() {
     return (
-        <section className="relative w-full bg-[#243B5C] overflow-hidden flex flex-col justify-center items-center pt-24 text-white">
-            {/* Text section */}
-            <div className="z-20 text-center px-4 mb-32 h-[80vh] flex flex-col items-center justify-center">
+        <section className="relative w-full min-h-screen bg-[#243B5C] overflow-hidden flex flex-col items-center justify-center text-white">
+            <div className="z-20 text-center px-4 flex flex-col items-center justify-center mt-10 md:mt-0">
                 <h1 className="text-4xl md:text-6xl font-bold">
-                    {/*Welcome to Camp <br />{" "}*/}
                     <span className="text-amber-300">HuskyHack</span>
                 </h1>
 
@@ -24,19 +19,26 @@ export default function HeroSection() {
                     May 2026 • George Brown Polytechnic, Daniel’s Building
                 </p>
 
-                {/* Sign up for future updates */}
                 <div className="mt-7">
                     <NewsletterForm />
                 </div>
 
-                {/* Sponsor us section */}
                 <div className="mt-7">
                     <SponsorContactLink />
                 </div>
             </div>
 
             {/* Svg Background layer */}
-            <BackgroundLayer className="absolute w-fit" />
+            <div className="absolute bottom-0 w-full h-full z-10">
+                <Image
+                    src={backgroundLayer}
+                    alt="Camping landscape"
+                    className="object-cover object-bottom"
+                    fill
+                    priority
+                    sizes="100vw"
+                />
+            </div>
         </section>
     );
 }
