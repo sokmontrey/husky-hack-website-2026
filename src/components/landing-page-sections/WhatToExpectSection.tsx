@@ -12,7 +12,7 @@ interface FeatureCardProps {
 }
 
 const FeatureCard = ({ image, title, description, className = "", imageClassName = "" }: FeatureCardProps) => (
-    <div className={`flex flex-col items-center flex-1 text-center w-fit ${className} border-2 border-[#92400e]`}>
+    <div className={`flex flex-col items-center flex-1 text-center w-fit ${className}`}>
         <div className={`w-full flex items-center justify-center`}>
             <Image src={image} alt={title} className={imageClassName} />
         </div>
@@ -47,7 +47,7 @@ const RoleCard = ({ image, title, description, buttonText }: RoleCardProps) => (
 
 const WhatToExpectSection = () => {
     return (
-        <div className="relative py-24 px-0 bg-[#0a192f] text-white overflow-hidden h-full">
+        <div className="relative py-24 px-0 bg-[linear-gradient(to_bottom,#1C6D41,#243B5C,#090F18,#030609)] text-white overflow-hidden h-full">
             {/* Background  */}
             <div className="absolute top-0 left-0 h-full w-auto z-0 pointer-events-none">
                 <Image
@@ -71,7 +71,7 @@ const WhatToExpectSection = () => {
                 />
             </div>
 
-            <h1 className="relative z-10 text-4xl font-bold text-center">What to Expect</h1>
+            <h1 className="relative z-10 text-4xl font-bold text-center mt-12">What to Expect</h1>
 
             <div className="flex flex-col justify-evenly h-[200vh]">
                 {/* Features */}
