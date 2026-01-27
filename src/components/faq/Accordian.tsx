@@ -18,7 +18,7 @@ function Accordion({ question, answer }: AccordionProps) {
                 className={`flex justify-between items-center text-left group w-full ${accordionOpen? "pb-4" : "pb-0"}`}
                 aria-expanded={accordionOpen}
             >
-                <h3 className="text-2xl font-serif ">{question}</h3>
+                <h3 className="text-2xl font-instrument-sans ">{question}</h3>
 
                 {/* Icon */}
                 <div
@@ -62,7 +62,7 @@ function Accordion({ question, answer }: AccordionProps) {
                 <div
                     className={`grid overflow-hidden transition-all duration-300 ease-in-out`}
                 >
-                    <div className="overflow-hidden text-gray-700 text-sm leading-relaxed">
+                    <div className="overflow-hidden text-white text-sm leading-relaxed">
                         {answer}
                     </div>
                 </div>
