@@ -35,7 +35,7 @@ export default function TeamMarquee({ teams }: { teams: Team[] }) {
                     <TeamMemberPhoto
                         mainProfilePicturePath={member.mainProfilePicturePath}
                         secondaryProfilePicturePath={member.secondaryProfilePicturePath}
-                        className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover transition-transform duration-150 group-hover:scale-110"
+                        className="w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover transition-transform duration-150 group-hover:scale-110"
                     />
                     {/* Pop up profile info */}
                     <div className="absolute top-full mt-3 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-150 w-48 pointer-events-none z-20 bg-black/80 p-2 rounded-md backdrop-blur-sm">
