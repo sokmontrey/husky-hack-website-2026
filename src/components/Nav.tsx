@@ -20,7 +20,7 @@ export default function NavBar() {
             </p>
           </a>
 
-          {/* Centre Section (DESKTOP ONLY) */}
+          {/* Centre Section*/}
           <div className="hidden md:flex items-center gap-[clamp(1vw,5vw,4vw)] font-[Instrument Sans] font-semibold">
             <a href="#About-Us" className="hover:text-[#FED571] transition">About</a>
             <a href="#Schedule" className="hover:text-[#FED571] transition">Schedule</a>
@@ -28,7 +28,7 @@ export default function NavBar() {
             <a href="#FAQ" className="hover:text-[#FED571] transition">FAQ</a>
           </div>
 
-          {/* Right Section (DESKTOP ONLY) */}
+          {/* Right Section */}
           <div className="hidden md:flex items-center gap-[1vw] font-semibold">
             <a href="#Contact-Us" className="hover:text-[#FED571] transition">
               Contact
