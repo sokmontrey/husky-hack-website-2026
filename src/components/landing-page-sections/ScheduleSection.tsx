@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ScheduleSection() {
     return (
-        <section className="relative w-full mt-24 min-h-[600px] md:min-h-[700px] flex items-center">
+        <section className="relative w-full mt-24 min-h-[600px] md:min-h-[700px] flex items-center" id="Schedule">
             {/* Left Content (Text) */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col justify-center">
@@ -28,10 +28,12 @@ export default function ScheduleSection() {
             {/* Image 2: Bottom Right (Hill) */}
             {/* Requirement: fully in frame (dont clip the top), left can be clipped, responsive */}
             <div className="absolute bottom-0 right-0 pointer-events-none z-0">
-                <img
+                <Image
                     src="/coming-soon/background-hill.svg"
                     alt="Hill Decoration"
-                    className=""
+                    className="w-full h-auto object-cover"
+                    width={1}
+                    height={1}
                 />
             </div>
         </section>
