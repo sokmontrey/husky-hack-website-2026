@@ -2374,7 +2374,7 @@
 </linearGradient>
 <linearGradient id="paint360_linear_1526_121" x1="564.443" y1="1389.96" x2="373.36" y2="1466.68" gradientUnits="userSpaceOnUse">
 <stop offset="0.0208831" stop-color="#FED571" stop-opacity="0.9"/>
-<stop offset="1" stop-color="#987F44"/>
+<stop offset="1" stop-color="#987F44" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint361_linear_1526_121" x1="527.5" y1="1906" x2="527.5" y2="2534" gradientUnits="userSpaceOnUse">
 <stop stop-color="#131721"/>
