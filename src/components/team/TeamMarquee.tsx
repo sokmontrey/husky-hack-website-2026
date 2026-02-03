@@ -38,7 +38,7 @@ export default function TeamMarquee({ teams }: { teams: Team[] }) {
                     className="group relative flex flex-col items-center justify-center w-[100px] h-fit"
                 >
                     <a
-                        href={member.socialLink || "#"}
+                        href={member.socialLink || undefined}
                         target={member.socialLink ? "_blank" : "_self"}
                         rel={member.socialLink ? "noopener noreferrer" : ""}
                         className={`relative flex flex-col items-center ${!member.socialLink ? "cursor-default" : ""}`}
