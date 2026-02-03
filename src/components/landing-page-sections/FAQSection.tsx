@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function FAQSection() {
     return (
-        <section id="FAQ" className="py-40 pt-10 bg-[#1C6D41]">
+        <section id="FAQ" className="py-40 pt-10u bg-[linear-gradient(to_right,#1E6D41,#4F743C)]">
             <h1 className="text-xl  md:text-2xl font-rethink-sans text-center mb-10 text-white">FREQUENTLY ASKED QUESTIONS</h1>
 
             <div className="flex flex-col justify-center items-center md:flex-row-reverse gap-4 w-full ">
