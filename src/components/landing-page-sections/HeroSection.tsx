@@ -1,6 +1,8 @@
 import Firefly from "../FireFly.tsx";
 import NewsletterForm from "../NewsletterForm";
 import SponsorContactLink from "../SponsorContactLink";
+import { MapPin, ArrowDown } from 'lucide-react';
+
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -15,17 +17,15 @@ export default function HeroSection() {
                     Where curious minds find their pack
                 </p>
 
-                <p className="text-base text-gray-300 mt-7">
-                    May 2026 • George Brown Polytechnic, Daniel&apos;s Building
+                <p className="text-base text-gray-300 pt-1">
+                    May 2026 • <MapPin className="inline" color="#FED571" /> George Brown Polytechnic,  Waterfront
                 </p>
 
                 <div className="mt-7">
                     <NewsletterForm />
                 </div>
 
-                <div className="mt-7">
-                    <SponsorContactLink />
-                </div>
+
             </div>
 
             {/* Svg Background layer */}
@@ -56,6 +56,11 @@ export default function HeroSection() {
                 <Firefly top="85%" left="30%" size="3px" widthRange={20} heightRange={20} />
                 <Firefly top="90%" left="65%" size="5px" widthRange={50} heightRange={50} minDurationX={5} maxDurationX={10} />
             </div>
+            <div className="mt-7 absolute bottom-20 z-10 flex flex-col items-center">
+                <SponsorContactLink />
+                <ArrowDown className="w-6 h-6 text-white mt-4 animate-bounce opacity-50"/>
+            </div>
+
         </section>
     );
 }
