@@ -2,6 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import packResults from "../../assets/WhatToExpect/pack.png";
 import trailHonour from "../../assets/WhatToExpect/trail_honours.png";
 import scoutMentor from "../../assets/WhatToExpect/scout_mentor.png";
+import Link from "next/link";
 
 interface FeatureCardProps {
     image: StaticImageData;
@@ -28,10 +29,12 @@ interface RoleCardProps {
     title: string;
     description: string;
     buttonText: string;
+    disabled?: boolean;
+    buttonLink?: string;
 }
 
-const RoleCard = ({ image = "/huskyhacklogo.svg", title, description, buttonText }: RoleCardProps) => (
-    <div className="relative bg-[#1e293b] rounded-3xl p-8 pt-20 flex flex-col items-center text-center flex-1 shadow-lg hover:scale-105 transition-transform duration-300 max-w-[250px] mt-16">
+const RoleCard = ({ image = "/huskyhacklogo.svg", title, description, buttonText, disabled = false, buttonLink }: RoleCardProps) => (
+    <div className="relative bg-[#1e293b] rounded-3xl p-8 pt-20 flex flex-col items-center text-center flex-1 shadow-lg hover:scale-105 transition-transform duration-300 max-w-[fit-content] mt-16">
 
         {/* Image Container: Absolute positioned to stick out the top */}
         <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full bg-orange-100 border-4 border-[#92400e] overflow-hidden flex items-center justify-center shadow-md">
@@ -53,8 +56,14 @@ const RoleCard = ({ image = "/huskyhacklogo.svg", title, description, buttonText
             {description}
         </p>
 
-        <button className="bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-3 px-12 rounded-full transition-colors mt-auto w-full max-w-[200px] font-rethink-sans">
-            {buttonText}
+        <button disabled={disabled} className="disabled:opacity-50 disabled:cursor-not-allowed bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-3 px-12 rounded-full transition-colors mt-auto w-full max-w-[200px] font-rethink-sans">
+            {buttonLink ? (
+                <Link href={buttonLink} target="_blank" rel="noopener noreferrer">
+                    {buttonText}
+                </Link>
+            ) : (
+                buttonText
+            )}
         </button>
     </div>
 );
@@ -62,30 +71,32 @@ const RoleCard = ({ image = "/huskyhacklogo.svg", title, description, buttonText
 const WhatToExpectSection = () => {
     return (
         <div>
-          
+            <div>
+                <Image src="/expectations/top_curve.svg" alt="a curve design" className="w-full h-auto absolute z-10 top-0" width={1} height={1} />
+            </div>
             <h1 className="relative z-10 text-3xl md:text-4xl font-bold text-center mt-8 md:mt-12 font-rethink-sans">What to Expect</h1>
 
             <div className="flex flex-col justify-evenly gap-32 md:gap-24 mt-24 md:mt-12">
                 {/* Features */}
-                <div className="relative z-10 flex flex-col md:flex-row justify-center items-center w-full max-w-6xl mx-auto">
+                <div className="relative z-10 flex flex-col md:flex-row gap-24 md:gap-0 justify-center items-center w-full max-w-6xl mx-auto">
                     <FeatureCard
                         image={packResults}
                         title="Networking"
-                        description="Our hackathon is more than just code—it's a place to learn, collaborate, and tell meaningful stories through technology."
+                        description="Build bonds that go beyond the weekend. Connect with a community that supports your journey long after camp closes."
                         className="w-full md:w-auto px-4"
                     />
 
                     <FeatureCard
                         image={trailHonour}
                         title="Prizes"
-                        description="Our hackathon is more than just code—it's a place to learn, collaborate, and tell meaningful stories through technology."
+                        description="We have stickers, swags, and $1,000 in cash top prizes"
                         className="mt-0 md:mt-16 md:translate-y-24 w-full md:w-auto px-4"
                     />
 
                     <FeatureCard
                         image={scoutMentor}
                         title="Mentorship"
-                        description="Our hackathon is more than just code—it's a place to learn, collaborate, and tell meaningful stories through technology."
+                        description="Learn from industry professional with experience in startup and entrepreneurship"
                         className="w-full md:w-auto px-4"
                     />
                 </div>
@@ -100,22 +111,25 @@ const WhatToExpectSection = () => {
                     <RoleCard
 
                         title="Hacker"
-                        description="This is the body copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                        description="Pack up your gear. Join us for 24 hours of designing, programming, and building to earn your badges and claim the top prize."
                         buttonText="Apply"
+                        disabled={true}
                     />
 
                     <RoleCard
 
                         title="Mentor"
-                        description="This is the body copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                        description="Be a Trail Guide. Share your expertise, help teams navigate technical challenges, and lead campers toward their 'aha' moments."
                         buttonText="Apply"
+                        disabled={true}
                     />
 
                     <RoleCard
 
                         title="Sponsor"
-                        description="This is the body copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                        description="Fuel the adventure. Equip our campers with resources, showcase your brand, and scout for the next generation of tech talent."
                         buttonText="Apply"
+                        buttonLink="/contact"
                     />
                 </div>
             </div>
