@@ -25,29 +25,31 @@ export default function TeamMarquee({ teams }: { teams: Team[] }) {
 
     const createMemberList = (members: TeamMember[], index: number) =>
         members.sort((a, b) => b.position.length - a.position.length).map((member) =>
-            <div key={`${member.displayName}-${index}`} className="group relative flex flex-col items-center justify-center w-[100px]">
+            <div key={`${member.displayName}-${index}`} className="group relative flex flex-col items-center justify-center w-[100px] h-fit">
                 <a
                     href={member.socialLink || "#"}
                     target={member.socialLink ? "_blank" : "_self"}
                     rel={member.socialLink ? "noopener noreferrer" : ""}
-                    className={`flex flex-col items-center ${!member.socialLink ? 'cursor-default' : ''}`}
+                    className={`relative flex flex-col items-center ${!member.socialLink ? 'cursor-default' : ''}`}
                 >
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                        <div className="bg-[#1C6D41] text-white text-xs font-bold py-1 px-3 rounded shadow-lg whitespace-nowrap relative">
+                            {member.displayName}
+                            <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] border-t-[#1C6D41]"></div>
+                        </div>
+                    </div>
+
                     <TeamMemberPhoto
                         mainProfilePicturePath={member.mainProfilePicturePath}
                         secondaryProfilePicturePath={member.secondaryProfilePicturePath}
-                        className="w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover transition-transform duration-150 group-hover:scale-110"
+                        className="w-16 h-16 md:w-20 md:h-20 rounded-[30px] object-cover transition-transform duration-150 group-hover:scale-110"
                     />
-                    {/* Pop up profile info */}
-                    <div className="absolute top-full mt-3 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-150 w-48 pointer-events-none z-20 bg-black/80 p-2 rounded-md backdrop-blur-sm">
-                        <h3 className="font-rethink-sans text-xl text-white">{member.displayName}</h3>
-                        <p className="text-xs font-instrument-sans text-gray-200">{member.position}</p>
-                    </div>
                 </a>
             </div>
         );
 
     return (
-        <div className="flex flex-row items-center w-full pt-2 overflow-x-hidden overflow-y-hidden">
+        <div className="flex flex-row items-center w-full py-10 overflow-x-hidden">
             <div
                 className="flex animate-scroll hover:[animation-play-state:paused] w-max"
             >
