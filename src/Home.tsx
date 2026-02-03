@@ -14,11 +14,10 @@ import CaveDecorationWrapper from "./utils/landingPage/CaveDecorationWrapper";
 export default function Home() {
     return (
         <>
-            <NavBar/>
+            <NavBar />
             <HeroSection />
             <AboutUsSection />
             <CaveDecorationWrapper>
-
                 <WhatToExpectSection />
                 <ScheduleSection />
             </CaveDecorationWrapper>
