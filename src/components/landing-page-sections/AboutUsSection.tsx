@@ -3,7 +3,7 @@ import danielCampus from "../../assets/gbp-daniels-campus.png";
 import studentsLearning from "../../assets/gbp-students-learning.png";
 export default function AboutUsSection() {
     return (
-        <section className="relative w-full min-h-[75vh] overflow-hidden">
+        <section className="relative w-full min-h-[75vh] overflow-hidden" id="About-Us">
             <div className="absolute flex flex-row items-center bottom-0 z-20 h-full w-full justify-between px-[20px]">
                 <div className="hidden absolute bottom-0 w-1/4 relative h-auto top-[100px] md:block">
                     <Image
