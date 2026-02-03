@@ -28,10 +28,12 @@ export default function ScheduleSection() {
             {/* Image 2: Bottom Right (Hill) */}
             {/* Requirement: fully in frame (dont clip the top), left can be clipped, responsive */}
             <div className="absolute bottom-0 right-0 pointer-events-none z-0">
-                <img
+                <Image
                     src="/coming-soon/background-hill.svg"
                     alt="Hill Decoration"
-                    className=""
+                    className="w-full h-auto object-cover"
+                    width={1}
+                    height={1}
                 />
             </div>
         </section>
