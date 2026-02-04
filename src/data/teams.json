@@ -11,7 +11,7 @@
         "socialLink": "",
         "position": "Co-VP",
         "mainProfilePicturePath": "/team-profiles/karina-main.jpg",
-        "secondaryProfilePicturePath": "/team-profiles/karina-alt.jpg"
+        "secondaryProfilePicturePath": ""
     },
     {
         "displayName": "Hanif Patel",
@@ -67,7 +67,7 @@
         "socialLink": "https://www.linkedin.com/in/rizmari-arrogante",
         "position": "Design",
         "mainProfilePicturePath": "/team-profiles/riz-main.jpg",
-        "secondaryProfilePicturePath": "/team-profiles/riz-alt.jpeg"
+        "secondaryProfilePicturePath": "/team-profiles/riz-alt.jpg"
     },
     {
         "displayName": "M'Kai McLachlan",
@@ -88,7 +88,7 @@
         "socialLink": "",
         "position": "Marketing Lead",
         "mainProfilePicturePath": "/team-profiles/gaya-main.jpg",
-        "secondaryProfilePicturePath": "/team-profiles/gaya-alt.jpg"
+        "secondaryProfilePicturePath": ""
     },
     {
         "displayName": "Jonathan Cao",
@@ -137,7 +137,7 @@
         "socialLink": "",
         "position": "Developer - Frontend",
         "mainProfilePicturePath": "/team-profiles/alfred-main.jpg",
-        "secondaryProfilePicturePath": "/team-profiles/alfred-alt.jpg"
+        "secondaryProfilePicturePath": ""
     },
     {
         "displayName": "Christian",
