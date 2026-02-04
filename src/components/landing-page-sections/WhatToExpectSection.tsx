@@ -22,7 +22,9 @@ const FeatureCard = ({
     <div
         className={`flex flex-col items-center flex-1 text-center w-fit ${className}`}
     >
-        <div className={`w-full flex items-center justify-center`}>
+        <div
+            className={`w-full flex items-center justify-center hover:animate-wiggle`}
+        >
             <Image src={image} alt={title} className={imageClassName} />
         </div>
         <h3 className="text-xl md:text-2xl font-bold text-[#fbbf24] mb-2 font-rethink-sans">
