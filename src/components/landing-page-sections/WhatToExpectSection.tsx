@@ -72,22 +72,28 @@ const RoleCard = ({
             {description}
         </p>
 
-        <button
-            disabled={disabled}
-            className="disabled:opacity-50 disabled:cursor-not-allowed bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-3 px-12 rounded-full transition-colors mt-auto w-full max-w-[200px] font-rethink-sans"
-        >
-            {buttonLink ? (
-                <Link
-                    href={buttonLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+        {buttonLink ? (
+            <Link
+                href={buttonLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-[200px]"
+            >
+                <button
+                    disabled={disabled}
+                    className="disabled:opacity-50 disabled:cursor-not-allowed bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-3 px-12 rounded-full transition-colors mt-auto w-full font-rethink-sans"
                 >
                     {buttonText}
-                </Link>
-            ) : (
-                buttonText
-            )}
-        </button>
+                </button>
+            </Link>
+        ) : (
+            <button
+                disabled={disabled}
+                className="disabled:opacity-50 disabled:cursor-not-allowed bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-3 px-12 rounded-full transition-colors mt-auto w-full max-w-[200px] font-rethink-sans"
+            >
+                {buttonText}
+            </button>
+        )}
     </div>
 );
 
